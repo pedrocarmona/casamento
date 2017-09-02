@@ -1,0 +1,10 @@
+version: '2'
+services:
+  app:
+    image: jekyll/jekyll:latest
+    command: jekyll server --watch
+    working_dir: /srv/jekyll
+    volumes:
+      - .:/srv/jekyll
+    ports:
+      - "4000:4000"
