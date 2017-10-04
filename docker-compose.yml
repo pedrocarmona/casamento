@@ -2,9 +2,14 @@ version: '2'
 services:
   app:
     image: jekyll/jekyll:latest
-    command: jekyll server --watch
+    command: bin/start
     working_dir: /srv/jekyll
     volumes:
       - .:/srv/jekyll
+    user: root
+    environment:
+      BUNDLE_PATH: /srv/jekyll/.bundle
+      JEKYLL_UID: $UID
+      JEKYLL_GID: $GID
     ports:
       - "4000:4000"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+usermod -u $JEKYLL_UID jekyll
+usermod -g $JEKYLL_GID jekyll
+
+bundle check || bundle install
+bundle exec jekyll server
