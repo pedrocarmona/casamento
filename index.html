@@ -25,7 +25,7 @@ _options:
     height: 1200
 ---
 
-<p class="success">Mensagem enviada.</p>
+  <p class="success">Mensagem enviada.</p>
 
 <p class="dates">
 	{{ page.start_datetime | date: "%A %-d of %B %Y %-I%P" }} - {{ page.end_datetime | date: "%-I%P" }}
@@ -44,44 +44,41 @@ _options:
 <p class="editable">Casamento na Capela de São Miguel em Coimbra, e copo de àgua da Quinta Dona Maria em Source.</p>
 
 <h3 class="editable">Confirmar reserva</h3>
-{{ site.eventbrite_embed }}
+
+<a class="email-button" href="mailto:casamento@leniaepedro?Subject=Confirm" target="_top">Confirmar via Email</a>
+
 
 <h3 class="editable">Localização da Cerimónia</h3>
 <div class="map" id="gmap_canvas"></div>
 <address><a href="https://www.google.com/maps/place/{{ page.map.address | url_encode }}">{% include icons/place.svg %} {{ page.map.address }}</a></address>
 
-<h3 class="editable">Contactar</h3>
-<p class="editable">Send us a message with any questions about sponsoring the event, tickets or anything else.</p>
-
-<form method="post" action="{{ site.baseurl }}/index.html?submit=success">
-	<label for="email_address">Email Address</label>
-	<input id="email_address" type="text" name="email">
-
-	<label for="name">Name</label>
-	<input id="name" type="text" name="name">
-
-	<label for="message">Message</label>
-	<textarea id="message" name="message"></textarea>
-
-	<input type="hidden" name="_to" value="contact@example.com">
-	<input type="text" name="_gotcha" style="display: none;">
-
-	<input type="submit" value="Send Message">
-</form>
 
 <script type="text/javascript">
 	window.mapData = {{ page.map | jsonify }};
 
 	function initMap() {
 		var myOptions = {
-			styles: [{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}],
+			styles: [
+				{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},
+				{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},
+				{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},
+				{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},
+				{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},
+				{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},
+				{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},
+				{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},
+				{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},
+				{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},
+				{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}
+			],
 			zoom: window.mapData.zoom,
 			center: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude)
 		};
 		var map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
 		var marker = new google.maps.Marker({
 			map: map,
-			position: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude)
+			position: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude),
+			title: '{{ page.map.address }}'
 		});
 
 		google.maps.event.addDomListener(window, "resize", function () {
