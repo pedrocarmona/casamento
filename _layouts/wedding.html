@@ -1,50 +1,25 @@
-<!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Jekyll v{{ jekyll.version }}">
-
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Abel">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/jquery.fancybox.css">
-    <link rel="apple-touch-icon" href="{{ site.baseurl }}/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="{{ site.baseurl }}/touch-icon.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon.png">
-
-    {% if page.background_image %}
-      <style>
-        html {
-          background-image: url({% include relative-src.html src=page.background_image %});"
-        }
-      </style>
-    {% endif %}
-
-    {% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
-      <script>
-        (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-
-        ga("create", "{{ site.google_analytics_key }}", "auto");
-        ga("send", "pageview");
-      </script>
-    {% endif %}
-  </head>
-
-  <body>
-    <div class="content">{{ content }}</div>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="{{ site.baseurl }}/js/jquery.fancybox.pack.js"></script>
-    <script src="{{ site.baseurl }}/js/masonry.min.js"></script>
-    <script src="{{ site.baseurl }}/js/atc.js"></script>
-    <script src="{{ site.baseurl }}/js/main.js"></script>
-  </body>
-</html>
-
+---
+start_datetime: 2018-05-05 11:30:00
+end_datetime: 2018-05-06 03:30:00
+timezone: Europe/London
+map:
+  address: Capela de São Miguel, Coimbra
+  zoom: 18
+  latitude: 40.207416
+  longitude: -8.426452
+map2:
+  address: Quinta Dona Maria, Soure
+  zoom: 16
+  latitude: 40.077504
+  longitude: -8.609569
+_options:
+  label_image:
+    width: 400
+    height: 400
+  image:
+    width: 600
+    height: 1200
+---
 
 
 <!DOCTYPE html>
@@ -53,12 +28,15 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="{{ site.lang }}">
+<html class="no-js" lang="{{ page.lang }}">
 <!--<![endif]-->
 
 <head>
     {% include common/meta.html %}
     <link href='{{ site.baseurl }}/assets/stylesheets/wedding.css' rel="stylesheet" type="text/css">
+    <link rel="apple-touch-icon" href="{{ site.baseurl }}/assets/images/wedding/logo.png">
+    <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/images/wedding/touch-icon.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/images/wedding/favicon.png">
     {% include common/libraries.html %}
 </head>
 
@@ -77,27 +55,43 @@
             {% if site.home.section2 %}{{ site.home.section2 }}{% endif %}
             {% if site.home.section3 %}{{ site.home.section3 }}{% endif %}
         </div>
-        <a class="btn-continue animated bounce" title="{{ site.data.i18n[site.lang].more }}" href="#social"></a>
+        <h1>Lénia e Pedro</h1>
+        <h2>5 de Maio de 2018</h2>
+
+        <a class="btn-continue animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#cerimony"></a>
     </div>
 
-    <div id="section1" class="section" data-name="social">
-        <h1 class="animated hidden">
-            <a class="btn-enter btn-light" title="{{ site.data.i18n[site.lang].enter_blog }}" href="{{ site.paths.blog | relative_url }}">{{ site.data.i18n[site.lang].enter_blog }}</a>
-        </h1>
-        <div class="social-links animated hidden">
-            <a class="btn-light ico-rss" href="{{ site.baseurl }}/feed.xml" rel="me" target="_blank" title="feed"></a>
-            {% if site.author.email %}
-                <a class="btn-light ico-gmail" href="mailto:{{ site.author.email }}" rel="me" target="_blank" title="email"></a>
-            {% endif %}
-            {% for link in site.author.social_links %}
-                {% if link.url %}
-                    <a class="btn-light ico-{{ link.name }}" href="{{ link.url }}" rel="me" target="_blank" title="{{ link.name }}"></a>
-                {% endif %}
-            {% endfor %}
+    <div id="section1" class="section" data-name="cerimony">
+        <div class="wrapper" id="wrapper_section1">
+            <div class="map" id="gmap_canvas"></div>
+            <h2>Cerimónia</h2>
+            <p>Capela de São Miguel, Coimbra</p>
+            <p>11h30</p>
         </div>
+        <a class="btn-continue animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#reception"></a>
     </div>
 
-    {% include home/scripts.html %}
+    <div id="section2" class="section" data-name="reception">
+        <div class="wrapper" id="wrapper_section2">
+            <div class="map" id="gmap2_canvas"></div>
+            <h2>Recepção</h2>
+            <p>Quinta Dona Maria, Soure</p>
+        </div>
+        <a class="btn-continue btn-continue-light animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#confirmation"></a>
+    </div>
+
+    <div id="section3" class="section" data-name="confirmation">
+        <h2>Confirmar presença</h2>
+        <p>
+            <a class="email-button" href="mailto:{{ site.email }}?subject=Confirmar%20Presen&ccedil;a&amp;body=Lenia%20e%20Pedro,&#014;&#010;Confirmo%20Presen&ccedil;a%20no%20vosso%20casamento.&#014;&#010;Cumprimentos,&#014;&#010;" target="_top">Confirmar via Email</a>
+        </p>
+        <p>
+            <!--a href="#" target="_top">Guardar no Calendário</a-->
+        </p>
+
+    </div>
+
+    {% include wedding/scripts.html %}
 </body>
 
 </html>
