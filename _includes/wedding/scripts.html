@@ -1,0 +1,126 @@
+<script src="{{ site.baseurl }}/assets/javascripts/jquery.fullPage.min.js"></script>
+<script src="{{ site.baseurl }}/assets/javascripts/jquery.easing.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ site.google_maps_javascript_api_key }}"></script>
+
+<script>
+    window.mapData = {{ layout.map | jsonify }};
+    window.map2Data = {{ layout.map2 | jsonify }};
+
+    function initMap() {
+        var styles = [
+            { "stylers": [ { "saturation": -100 }, { "visibility": "on" } ] },
+            {"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},
+            {"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},
+            {"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},
+            {"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},
+            {"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},
+            {"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},
+            {"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},
+            {"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},
+            {"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},
+            {"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},
+            {"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}
+        ];
+        var defaultMapOptions = {
+            styles: styles,
+            scrollwheel: false,
+            mapTypeControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false
+        };
+
+        // map 1
+
+        var mapCanvas = document.getElementById('gmap_canvas');
+        var mapOptions =  {
+            styles: styles,
+            scrollwheel: false,
+            mapTypeControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false,
+            zoom: window.mapData.zoom,
+            center: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude)
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude),
+            title: '{{ layout.map.address }}'
+        });
+        google.maps.event.addDomListener(window, "resize", function () {
+            map.setCenter(mapOptions.center);
+        });
+
+        // map 2
+
+        var map2Canvas = document.getElementById('gmap2_canvas');
+        var map2Options =  {
+            styles: styles,
+            scrollwheel: false,
+            mapTypeControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false,
+            zoom: window.map2Data.zoom,
+            center: new google.maps.LatLng(window.map2Data.latitude, window.map2Data.longitude)
+        }
+        var map2 = new google.maps.Map(map2Canvas, map2Options);
+        var marker = new google.maps.Marker({
+            map: map2,
+            position: new google.maps.LatLng(window.map2Data.latitude, window.map2Data.longitude),
+            title: '{{ layout.map2.address }}'
+        });
+        google.maps.event.addDomListener(window, "resize", function () {
+            map2.setCenter(map2Options.center);
+        });
+    }
+
+    google.maps.event.addDomListener(window, "load", initMap);
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $.fn.fullpage({
+            anchors: ['intro', 'cerimony', 'cerimonylocation', 'reception', 'receptionlocation', 'confirmation'],
+            css3: true,
+            fixedElements: '.site-notice',
+            menu: '#menu',
+            navigation: true,
+            navigationPosition: 'right',
+            resize: false,
+            scrollingSpeed: 500,
+
+            afterLoad: function (anchorLink, index) {
+                if (index === 1) {
+                    $('#section0 .headings, #section0').removeClass('hidden').addClass('fadeInDown');
+                    $('.btn-continue').removeClass('hidden').addClass('bounce');
+                }
+                if (index === 2) {
+                    $('#section1 h1, #section1 .social-links').removeClass('hidden').addClass('fadeInUp');
+                }
+
+                if (index === 3) {
+                    //initMap();
+                }
+            },
+
+            onLeave: function (index, direction) {
+                if (index == 1 && direction == 'down') {
+                    $('#section0 .headings, #section0 .btn-continue').addClass('hidden').removeClass('bounce fadeInDown fadeInLeft');
+                }
+                if (index == 2 && direction == 'up') {
+                    $('#section1 h1, #section1 .social-links').addClass('hidden').removeClass('fadeInUp');
+                }
+            },
+        });
+    });
+</script>
+
+{% if site.google_analytics %}
+<script>
+$(document).on('click', '[class*="btn"]', function(event) {
+    sendGaEvent('Home', 'Click', event.currentTarget);
+});
+</script>
+{% endif %}
