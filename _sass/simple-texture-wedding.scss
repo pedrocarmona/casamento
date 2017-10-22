@@ -96,6 +96,15 @@ textarea {
     color: $color-text-light;
 }
 
+#section3 {
+    background: url('../images/theme/noisy_texture_section0-200x200.png') repeat 0 0 #F0F0F0;
+}
+
+#section4 {
+    background: url('../images/theme/noisy_texture_section1-200x200.png') repeat 0 0 #150E1F;
+    color: $color-text-light;
+}
+
 #fullPage-nav {
     span {
         border: 1px solid #8A8A8A;
@@ -209,7 +218,7 @@ textarea {
 }
 
 /****************
-section1 cerimonylocation
+section1 cerimony
 ******************/
 
 #section1{
@@ -227,7 +236,7 @@ section1 cerimonylocation
     margin: auto;
     width:  80%;
     height: 50%;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 /****************
@@ -249,8 +258,16 @@ section2 reception
     margin: auto;
     width:  80%;
     height: 50%;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
+
+/****************
+section4 missing days
+******************/
+
+.missing_days{
+    width: 80%;
+}
 
 @import 'simple-texture/wedding/responsive';

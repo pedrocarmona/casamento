@@ -27,6 +27,18 @@ en: &en
   tags: 'Tags'
   theme_info: '<p><small>Theme <a href="https://github.com/yizeng/jekyll-theme-simple-texture" target="_blank">Simple Texture</a> developed by <a href="http://yizeng.me" target="_blank">Yi Zeng</a>, powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>.</small></p>'
   view: 'View'
+  date: '5th May 2018'
+  cerimony: 'Cerimony'
+  chapel: 'S. Miguel Chapel, Coimbra'
+  reception: 'Reception'
+  reception_location: 'Location: Quinta Dona Maria, Soure'
+  rsvp: 'RSVP'
+  rsvp_via_email: 'RSVP via Email'
+  email_subject: 'Confirmar%20Presen&ccedil;a'
+  email_body: 'Lenia%20e%20Pedro,&#014;&#010;Confirmo%20Presen&ccedil;a%20no%20vosso%20casamento.&#014;&#010;Cumprimentos,&#014;&#010;'
+  missing_days: '#days days until our wedding!!!'
+  its_today: 'Its today!!!'
+  days_since: 'We got married #days days ago!!!'
 en-us:
   <<: *en
 en-gb:
@@ -66,6 +78,18 @@ pt: &pt
   tags: 'Tags'
   theme_info: '<p><small>Theme <a href="https://github.com/yizeng/jekyll-theme-simple-texture" target="_blank">Simple Texture</a> developed by <a href="http://yizeng.me" target="_blank">Yi Zeng</a>, powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>.</small></p>'
   view: 'View'
+  date: '5 de Maio 2018'
+  cerimony: 'Cerimónia'
+  chapel: 'Capela de S. Miguel, Coimbra'
+  reception: 'Recepção'
+  reception_location: 'Localização: Quinta Dona Maria, Soure'
+  rsvp: 'Confirmar presença'
+  rsvp_via_email: 'Confirmar via Email'
+  email_subject: 'Confirmar%20Presen&ccedil;a'
+  email_body: 'Lenia%20e%20Pedro,&#014;&#010;Confirmo%20Presen&ccedil;a%20no%20vosso%20casamento.&#014;&#010;Cumprimentos,&#014;&#010;'
+  missing_days: 'Faltam apenas #days dias para o grande dia!!!'
+  its_today: 'É Hoje!!!'
+  days_since: 'Casamos à #days dias!!!'
 pt-pt:
   <<: *pt
 pt-br:

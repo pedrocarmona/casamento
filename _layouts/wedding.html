@@ -43,14 +43,24 @@ _options:
 </head>
 
 <body>
-    <ul id="menu">
-        <li data-menuanchor="intro"><a href="#intro">{{ page.intro_label }}</a></li>
-        <li data-menuanchor="cerimony"><a href="#cerimony">{{ page.cerimony_label }}</a></li>
-        <li data-menuanchor="reception"><a href="#reception">{{ page.reception_label }}</a></li>
-        <li data-menuanchor="confirmation"><a href="#confirmation">{{ page.confirmation_label }}</a></li>
-    </ul>
+    <header class="head" id="fixedHeader">
+        <nav class="nav" id="navId">
+
+        <ul id="menu">
+            <li data-menuanchor="intro"><a href="#intro">{{ page.intro_label }}</a></li>
+            <li data-menuanchor="cerimony"><a href="#cerimony">{{ page.cerimony_label }}</a></li>
+            <li data-menuanchor="reception"><a href="#reception">{{ page.reception_label }}</a></li>
+            <li data-menuanchor="confirmation"><a href="#confirmation">{{ page.confirmation_label }}</a></li>
+            <li data-menuanchor="missing_days"><a href="#missing_days">{{ page.missing_days_label }}</a></li>
+        </ul>
+        </nav>
+        <div id="logoBackground"></div>
+    </header>
+
+
 
     <div id="section0" class="section" data-name="intro">
+
 
         <div class="headings animated fadeInLeft">
             {% if site.home.section1 %}{{ site.home.section1 }}{% endif %}
@@ -59,16 +69,19 @@ _options:
         </div>
         <div style="height: 50%;"></div>
         <h1>Lénia & Pedro</h1>
-        <h2>5 de Maio de 2018</h2>
+        <h2>{{ site.data.i18n[page.lang].date }}</h2>
         <a class="btn-continue btn-continue-light animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#cerimony"></a>
     </div>
 
     <div id="section1" class="section" data-name="cerimony">
         <div class="wrapper" id="wrapper_section1">
             <div class="map" id="gmap_canvas"></div>
-            <h2>Cerimónia</h2>
-            <p>Capela de São Miguel, Coimbra</p>
+            <h2>{{ site.data.i18n[page.lang].cerimony }}</h2>
             <p>11h30</p>
+            <p>{{ site.data.i18n[page.lang].chapel }}</p>
+            <p>latitude: {{ layout.map.latitude }}<br>
+            longitude: {{ layout.map.longitude }}</p>
+
         </div>
         <a class="btn-continue animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#reception"></a>
     </div>
@@ -76,21 +89,39 @@ _options:
     <div id="section2" class="section" data-name="reception">
         <div class="wrapper" id="wrapper_section2">
             <div class="map" id="gmap2_canvas"></div>
-            <h2>Recepção</h2>
-            <p>Quinta Dona Maria, Soure</p>
+            <h2>{{ site.data.i18n[page.lang].reception }}</h2>
+            <p>{{ site.data.i18n[page.lang].reception_location }}</p>
+            <p>latitude: {{ layout.map2.latitude }}<br>
+            longitude: {{ layout.map2.longitude }}</p>
         </div>
         <a class="btn-continue btn-continue-light animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#confirmation"></a>
     </div>
 
     <div id="section3" class="section" data-name="confirmation">
-        <h2>Confirmar presença</h2>
+        <h2>{{ site.data.i18n[page.lang].rsvp }}</h2>
         <p>
-            <a class="email-button" href="mailto:{{ site.email }}?subject=Confirmar%20Presen&ccedil;a&amp;body=Lenia%20e%20Pedro,&#014;&#010;Confirmo%20Presen&ccedil;a%20no%20vosso%20casamento.&#014;&#010;Cumprimentos,&#014;&#010;" target="_top">Confirmar via Email</a>
+            <a class="email-button" href="mailto:{{ site.email }}?subject={{ site.data.i18n[page.lang].email_subject }}&amp;body={{ site.data.i18n[page.lang].email_body }}" target="_top">{{ site.data.i18n[page.lang].rsvp_via_email }}</a>
         </p>
         <p>
             <!--a href="#" target="_top">Guardar no Calendário</a-->
         </p>
 
+    </div>
+    <div id="section4" class="section" data-name="missing_days">
+        {%   assign today = site.time | date: '%s'      %}
+        {%   assign start = layout.start_datetime | date: '%s'  %}
+        {%   assign secondsMissing = start | minus: today     %}
+        {%   assign hoursMissing = secondsMissing | divided_by: 60 | divided_by: 60     %}
+        {%   assign daysMissing = hoursMissing | divided_by: 24  %}
+        {% if daysMissing >= 1 %}
+            <h2>{{ site.data.i18n[page.lang].missing_days | replace: '#days', daysMissing }}<h2>
+        {% elsif daysMissing == 0 %}
+            <h2>{{ site.data.i18n[page.lang].its_today }}<h2>
+        {% else %}
+            {%   assign daysSince = daysMissing | times: -1  %}
+            <h2>{{ site.data.i18n[page.lang].days_since | replace: '#days', daysSince }}<h2>
+        {% endif %}
+        <img class="missing_days" src="{{ site.baseurl }}/assets/images/wedding/footer.gif" alt="missing_days">
     </div>
 
     {% include wedding/scripts.html %}
