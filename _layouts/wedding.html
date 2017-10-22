@@ -77,10 +77,12 @@ _options:
         <div class="wrapper" id="wrapper_section1">
             <div class="map" id="gmap_canvas"></div>
             <h2>{{ site.data.i18n[page.lang].cerimony }}</h2>
-            <p>11h30</p>
-            <p>{{ site.data.i18n[page.lang].chapel }}</p>
-            <p>latitude: {{ layout.map.latitude }}<br>
-            longitude: {{ layout.map.longitude }}</p>
+            <p>
+                11h30<br>
+                {{ site.data.i18n[page.lang].chapel }}<br>
+                latitude: {{ layout.map.latitude }}<br>
+                longitude: {{ layout.map.longitude }}
+            </p>
 
         </div>
         <a class="btn-continue animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#reception"></a>
@@ -90,9 +92,11 @@ _options:
         <div class="wrapper" id="wrapper_section2">
             <div class="map" id="gmap2_canvas"></div>
             <h2>{{ site.data.i18n[page.lang].reception }}</h2>
-            <p>{{ site.data.i18n[page.lang].reception_location }}</p>
-            <p>latitude: {{ layout.map2.latitude }}<br>
-            longitude: {{ layout.map2.longitude }}</p>
+            <p>
+                {{ site.data.i18n[page.lang].reception_location }}<br>
+                latitude: {{ layout.map2.latitude }}<br>
+                longitude: {{ layout.map2.longitude }}
+            </p>
         </div>
         <a class="btn-continue btn-continue-light animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#confirmation"></a>
     </div>
