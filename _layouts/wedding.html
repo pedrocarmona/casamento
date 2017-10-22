@@ -57,11 +57,12 @@ _options:
         <div id="logoBackground"></div>
     </header>
 
+    <div style="position: fixed;z-index:99; top: 0; right: 0; border: 0;" >
+         <a class="translate-button" title="translate" href="{{ site.baseurl }}/{{ page.other_translation_url }}">{{ page.other_translation_lang }}</a>
+    </div>
 
 
     <div id="section0" class="section" data-name="intro">
-
-
         <div class="headings animated fadeInLeft">
             {% if site.home.section1 %}{{ site.home.section1 }}{% endif %}
             {% if site.home.section2 %}{{ site.home.section2 }}{% endif %}
