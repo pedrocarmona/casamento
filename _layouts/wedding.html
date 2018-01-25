@@ -113,20 +113,25 @@ _options:
         <a class="btn-continue animated bounce" title="{{ site.data.i18n[page.lang].more }}" href="#missing_days"></a>
     </div>
     <div id="section4" class="section" data-name="missing_days">
-        {%   assign today = site.time | date: '%s'      %}
-        {%   assign start = layout.start_datetime | date: '%s'  %}
-        {%   assign secondsMissing = start | minus: today     %}
-        {%   assign hoursMissing = secondsMissing | divided_by: 60 | divided_by: 60     %}
-        {%   assign daysMissing = hoursMissing | divided_by: 24  %}
-        {% if daysMissing >= 1 %}
-            <h2>{{ site.data.i18n[page.lang].missing_days | replace: '#days', daysMissing }}<h2>
-        {% elsif daysMissing == 0 %}
-            <h2>{{ site.data.i18n[page.lang].its_today }}<h2>
-        {% else %}
-            {%   assign daysSince = daysMissing | times: -1  %}
-            <h2>{{ site.data.i18n[page.lang].days_since | replace: '#days', daysSince }}<h2>
-        {% endif %}
+        <h2 id="missing_days" data-date="{{ layout.start_datetime | date: '%Y-%m-%d' }}"></h2>
+
         <img class="missing_days" src="{{ site.baseurl }}/assets/images/wedding/footer.gif" alt="missing_days">
+
+        <script>
+            $(document).ready(function () {
+                var date = $("#missing_days").data("date");
+                var momentDate = moment(date, "YYYY-MM-DD").startOf('day');
+                var missing = moment().startOf('day').diff(momentDate, 'days');
+                if(missing < 0) {
+                  phrase = "{{ site.data.i18n[page.lang].missing_days}}".replace("#days", Math.abs(missing));
+                } else if (missing == 0) {
+                  phrase = "{{ site.data.i18n[page.lang].its_today }}"
+                } else if (missing > 0) {
+                  phrase = "{{ site.data.i18n[page.lang].days_since }}".replace("#days", missing);
+                }
+                $("#missing_days").text(phrase)
+            });
+        </script>
     </div>
 
     {% include wedding/scripts.html %}

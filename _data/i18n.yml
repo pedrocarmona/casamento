@@ -35,7 +35,7 @@ en: &en
   rsvp: 'RSVP'
   rsvp_via_email: 'RSVP via Email'
   email_subject: 'Confirmar%20Presen&ccedil;a'
-  email_body: 'Lenia%20e%20Pedro,&#014;&#010;Confirmo%20Presen&ccedil;a%20no%20vosso%20casamento.&#014;&#010;Cumprimentos,&#014;&#010;'
+  email_body: 'Lenia%20e%20Pedro,&#014;&#010;I%20confirm%20presence%20in%20your%20wedding.&#014;&#010;Best%20wishes,&#014;&#010;'
   missing_days: '#days days until our wedding!!!'
   its_today: 'Its today!!!'
   days_since: 'We got married #days days ago!!!'
